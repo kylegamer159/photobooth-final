@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Snap &amp; Style – Admin</title>
+<style>
+  :root{--ink:#222;--line:#e3e3e8;--bg:#faf9fc;--card:#fff;--accent:#ff5fa2}
+  *{box-sizing:border-box}
+  body{font-family:system-ui,sans-serif;margin:0;background:var(--bg);color:var(--ink)}
+  header{padding:18px 24px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;background:#fff}
+  header h1{font-size:1.2rem;margin:0}
+  main{max-width:1000px;margin:0 auto;padding:24px}
+  #login{max-width:360px;margin:60px auto;padding:24px;background:#fff;border:1px solid var(--line);border-radius:16px}
+  #login input{width:100%;padding:10px 12px;margin:6px 0;border:1px solid var(--line);border-radius:10px}
+  #login button,.btn{padding:10px 16px;border:0;border-radius:10px;background:var(--accent);color:#fff;font-weight:600;cursor:pointer}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:24px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;text-align:center}
+  .card b{display:block;font-size:1.6rem}
+  .card span{font-size:.8rem;color:#777}
+  table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  th,td{padding:8px 12px;text-align:left;border-bottom:1px solid var(--line);font-size:.88rem}
+  th{background:#f3f1f7}
+  section{margin-bottom:28px}
+  h2{font-size:1rem;color:#555;margin:0 0 10px}
+  #msg{color:#a00;font-size:.85rem;min-height:1.2em}
+  [hidden]{display:none!important}
+  #who{font-size:.85rem;color:#666}
+</style>
+</head>
+<body>
+
+<div id="login">
+  <h2 style="margin-top:0">Admin sign in</h2>
+  <p style="font-size:.85rem;color:#666">Sign in with the account you marked <code>is_admin = true</code> in Supabase.</p>
+  <input id="email" type="email" placeholder="you@example.com">
+  <input id="pass" type="password" placeholder="Password">
+  <button id="go">Sign in</button>
+  <p id="msg"></p>
+</div>
+
+<div id="dash" hidden>
+  <header>
+    <h1>📊 Snap &amp; Style – Admin</h1>
+    <div><span id="who"></span> &nbsp; <button class="btn" id="out">Sign out</button></div>
+  </header>
+  <main>
+    <section>
+      <h2>Last 30 days</h2>
+      <div class="cards" id="cards"></div>
+    </section>
+    <section>
+      <h2>Most-used frames &amp; layouts</h2>
+      <table><thead><tr><th>Name / id</th><th>Saves</th></tr></thead><tbody id="topFrames"></tbody></table>
+    </section>
+    <section>
+      <h2>Recent activity</h2>
+      <table><thead><tr><th>When</th><th>Who</th><th>Event</th><th>Details</th></tr></thead><tbody id="events"></tbody></table>
+    </section>
+    <p style="font-size:.78rem;color:#999">This only shows sign-ins and saves people have already made — never the photos themselves, which live in each user's own private storage folder.</p>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>
